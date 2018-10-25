@@ -5,13 +5,13 @@ class BulletinBoard extends ConvoApp {
 	onRegisterIntents() {
 		this.registerListIntents();
 		this.registerIntent('welcome', (convo, params, option, debug) =>
-		  Convo.ask(convo.promise(() => {
-		      if (this.hasBulletins(convo)) {
-		        return this.readBulletins(convo);
-		      } else {
-		        return convo.speak('Welcome to BulletinBoard. To add something to your board, just say: add, and then the message');
-		      }
-		  }),debug)
+			Convo.ask(convo.promise(() => {
+				if (this.hasBulletins(convo)) {
+				  return this.readBulletins(convo);
+				} else {
+				  return convo.speak('Welcome to BulletinBoard. To add something to your board, just say: add, and then the message');
+				}
+			}),debug)
 		);
 		this.registerIntent('add_bulletin', (convo, {bulletin}, option, debug) =>
 		  Convo.ask(this.addBulletin(convo,bulletin), debug)
@@ -51,9 +51,9 @@ class BulletinBoard extends ConvoApp {
 		return false;
 	}
 
-  hasBulletins(convo) {
-    return convo.isInStorage("bulletins", list => list.length > 0);
-  }
+	hasBulletins(convo) {
+	  return convo.isInStorage("bulletins", list => list.length > 0);
+	}
 
 	readBulletins(convo, count = 5) {
 		let correctedCount = count === 0 ? 5 : count;
@@ -66,21 +66,21 @@ class BulletinBoard extends ConvoApp {
 		return convo.speak("There's nothing on your board. To add something to your board, just say: add, and then the message");
 	}
 
-  addBulletin(convo, message) {
+	addBulletin(convo, message) {
 	    let bulletins = this.hasBulletins(convo) ? convo.getFromStorage("bulletins") : [];
 	    bulletins.unshift({text:message, added: new Date().valueOf()});
 	    return convo
 				.setToStorage("bulletins", bulletins)
 				.updateList(bulletins)
 				.speak(`Adding:${message}`);
-  }
+	}
 
-  clearBulletins(convo) {
+	clearBulletins(convo) {
 	    return convo
 				.setToStorage("bulletins", [])
 				.clearList()
 				.speak(`Cleared all bulletins.`);
-  }
+	}
 
 	deleteBulletin(convo) {
 		return convo.promise(() => {
@@ -96,7 +96,6 @@ class BulletinBoard extends ConvoApp {
 			}
 			return convo.speak('There was no bulletin to delete.');
 		})
-
 	}
 }
 

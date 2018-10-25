@@ -6,7 +6,6 @@ let cs = new ConvoStorage("storage.json")
 	cs.load(storageConvo => {
 		new BulletinBoard()
 		  .intent(storageConvo, 'welcome', null, null, {log:true})
-			.then(({app, convo}) => app.intent(new Convo(convo), 'list_find', {query:'poop'}, null, {log:true}))
 			//.then(({app, convo}) => app.intent(new Convo(convo), 'list_next', null, null, {log:true}))
 			//.then(({app, convo}) => app.intent(new Convo(convo), 'list_select', null, null, {log:true}))
 			//.intent(storageConvo, 'read_bulletins', null, null, {log:true})
