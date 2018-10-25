@@ -1,6 +1,6 @@
 {
   "name": "@tmtek/bulletinboard",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "A convo app for shared reminders",
   "main": "index.js",
   "scripts": {
@@ -15,6 +15,6 @@
   "author": "tmtek",
   "license": "ISC",
   "dependencies": {
-    "@tmtek/convo": "^0.1.10"
+    "@tmtek/convo": "^0.2.14"
   }
 }
