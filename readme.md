@@ -14,7 +14,7 @@ This is the standard entry point into the application. It will read the first pa
 
 > "Add" or "Add this is an important note everyone should be aware of."
  
- This command allows you to add new notes to the board. If you say "add" and then continue to speak, then the application will take the rest of your statement and add it as the note. If you just say "Add", it will then prompt you for a message.
+ This command allows you to add new notes to the board. If you say "add" and then continue to speak, the application will take the rest of your statement and add it as the note. If you just say "Add", it will then prompt you for a message.
 
 > "Wipe the board"
 
@@ -61,3 +61,18 @@ When a note is selected, it will be read to you in detail. Aside for list naviga
 
 Deletes the current selected note from the list.
 
+## Note Expiry
+
+When you add a new note to the board, Bulletin Board will attempt to extract an expiry time from message itself. When a note expires, it is automatically removed from the board. For example, if you were to say:
+
+> " add get milk today."
+
+Then Bulletin Board will mark this note to expire once the clock passes 11:59 PM this evening.
+
+If you were to say:
+
+> "add Meet John for coffee on Thursday."
+
+Bulletin Board will expire the note at the end of day on the next Thursday that passes. If today is Thursday it will expire tonight, If today is Monday it will expire three days from now, If Today is Friday it will expire 6 days from now.
+
+If an expiry cannot be deduced from the message, then the note does not expire. It will have to be removed manually.
