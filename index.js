@@ -42,7 +42,7 @@ class BulletinBoard extends ConvoApp {
 		if (type === 'bulletin') {
 			return convo.speak(Say.listPageResponse(page, paging, list, item => Say.ensureSentence(item.text), "\n\n"));
 		}
-		return convo.speak(`Where's my list?:${JSON.stringify(convo.getContext('list'))}`);
+		return convo.speak("Can't access the list right now.");
 	}
 
 	onRespondForListSelection({ convo, type, item }) {
@@ -132,7 +132,6 @@ class BulletinBoard extends ConvoApp {
 			})
 			return convo
 				.setToStorage("bulletins", bulletins)
-				.updateList(bulletins)
 				.speak("Updated Expires.");
 		})
 	}
