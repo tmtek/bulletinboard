@@ -5,50 +5,42 @@ const en = require('javascript-time-ago/locale/en');
 class BulletinBoard extends ConvoApp {
 
 	onPrepareHelp() {
-		this._help = [
+		return [
 			{
 				description:'How to add bulletins to the board.',
 				tips:[
-					{tip:'Say "Add Bulletin" to add a new bulletin to your board.'},
-					{tip:'Say "Add" followed by your message to quickly add a new bulletin to the board.'},
-					{tip:'New bulletins will be automatically sorted by when they expire.'}
+					{text:'Say "Add Bulletin" to add a new bulletin to your board.'},
+					{text:'Say "Add" followed by your message to quickly add a new bulletin to the board.'},
+					{text:'New bulletins will be automatically sorted by when they expire.'}
 				]
 			},
 			{
 				description:'How to navigate the bulletin board list.',
 				tips:[
-					{tip:'You can say "what\'s on the board" at any time to hear what\'s on your board'},
-					{tip:'Bulletins are often presented in pages. You can say "next page", or "previous page" to jump ahead or back.'},
-					{tip:'You can say "read them all" to read the entire list of bulletins with no pages.'},
-					{tip:'When you are presented with a list page, you can ask to select any bulletin by saying "Select the first one.", or "select the second one".'},
-					{tip:'You can select any item by saying "Select the one that contains..." along with a word that is in the bulletin you want to select.'},
-					{tip:'You can say "back to list" at any time to return to your place in a list after a selection.'}
+					{text:'You can say "what\'s on the board" at any time to hear what\'s on your board'},
+					{text:'Bulletins are often presented in pages. You can say "next page", or "previous page" to jump ahead or back.'},
+					{text:'You can say "read them all" to read the entire list of bulletins with no pages.'},
+					{text:'When you are presented with a list page, you can ask to select any bulletin by saying "Select the first one.", or "select the second one".'},
+					{text:'You can select any item by saying "Select the one that contains..." along with a word that is in the bulletin you want to select.'},
+					{text:'You can say "back to list" at any time to return to your place in a list after a selection.'}
 				]
 			},
 			{
 				description:'How to create bulletins that expire, and delete ones that don\'t.',
 				tips:[
-					{tip:'If an added bulletin contains reference to a day such as : "today", "tonight", "tomorrow", "Tuesday", then it will automatically expire at the end of that day.'},
-					{tip:'If we cannot determine when a bulletin expires automatically, then it will remain on the board until it is deleted manually.'},
-					{tip:'If you select a bulletin from the list, it can be manually deleted by saying "delete it", or "wipe it".'},
-					{tip:'You can delete all bulletins at any time by saying "Wipe the board".'}
+					{text:'If an added bulletin contains reference to a day such as : "today", "tonight", "tomorrow", "Tuesday", then it will automatically expire at the end of that day.'},
+					{text:'If we cannot determine when a bulletin expires automatically, then it will remain on the board until it is deleted manually.'},
+					{text:'If you select a bulletin from the list, it can be manually deleted by saying "delete it", or "wipe it".'},
+					{text:'You can delete all bulletins at any time by saying "Wipe the board".'}
 				]
 			}
 		];
 	}
 
 	onRegisterIntents() {
-		this.onPrepareHelp();
+		this.registerHelpIntent();
 		this.initTimeAndExpires();
 		this.registerListIntents();
-		this.registerIntent('help', (convo, params, option, debug) =>
-			Convo.ask(
-				convo
-					.setList('help', this._help, {start:0, count:-1})
-					.forListPage(this.onRespondForList)
-					,
-			debug)
-		);
 		this.registerIntent('welcome', (convo, params, option, debug) =>
 			Convo.ask(convo.promise(() => {
 				if (this.hasBulletins(convo)) {
@@ -100,23 +92,6 @@ class BulletinBoard extends ConvoApp {
 					}),
 					'actions.capability.SCREEN_OUTPUT'
 				);
-		} else if (type === 'help') {
-			if (!convo.isInStorage("help_intro", intro => intro.ran)) {
-				convo.speak(`Before you are presented with the list of help topics, know that you can say "Select the first one", or "Select the second one", etc to get more details on any of the topics presented to you.`, false)
-				.setToStorage("help_intro", {ran:true});
-			}
-			return convo.speak('Here are the help topics:')
-			.speak(Say.listPageResponse(page, paging, list, item => Say.ensureSentence(item.description), "\n\n"), false)
-			.present(
-				Convo.List({
-					title:'Help Topics',
-					items:Say.listItems(
-						list,
-						item => ({title:item.description, description:`${item.tips.length} tips`})
-					)
-				}),
-				'actions.capability.SCREEN_OUTPUT'
-			)
 		}
 		return convo.speak("Can't access the list right now.");
 	}
@@ -131,28 +106,11 @@ class BulletinBoard extends ConvoApp {
 				:
 				"This bulletin will not expire."
 			)
-		} else if (type === 'help' && item) {
-			return convo
-			.speak(item.description)
-			.speak('Before we read the tips, know that you can say "back to list" to return to the help topics.\n\n')
-			.speak(item.tips.reduce((say, tip) => say.sentence(`${tip.tip}\n\n`), new Say()), false)
-			.present(
-				Convo.List({
-					title:'Tips',
-					items:Say.listItems(
-						item.tips,
-						tip => ({title:tip.tip}),
-						(item, i) => `tip${i}`
-					)
-				}),
-				'actions.capability.SCREEN_OUTPUT'
-			);
 		}
 		return convo.speak('Nothing is selected');
 	}
 
 	onListSelectUI(convo, type, itemName) {
-		//return convo.speak(`Selected:${itemName}`);
 		return convo.selectFromList(ConvoApp.ensureNumber(itemName.split('_')[1]));
 	}
 

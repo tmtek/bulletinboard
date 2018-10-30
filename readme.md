@@ -8,11 +8,11 @@ Bulletin Board is a Google Home application built using convo. This app allows f
 
 This is the standard entry point into the application. It will read the first page of 5 notes, and then offer you the opportunity to speak another command. 
 
-> "Bring me up to date."
+> "what's on the board?"
  
  This command will cause the application to read all of the notes on the board, and then exit. If you want to hook Buletin Board up to your daily routines, this is the command to use to do so.
 
-> "Add" or "Add this is an important note everyone should be aware of."
+> "Add bulletin" or "Add this is an important note everyone should be aware of."
  
  This command allows you to add new notes to the board. If you say "add" and then continue to speak, the application will take the rest of your statement and add it as the note. If you just say "Add", it will then prompt you for a message.
 
@@ -76,3 +76,11 @@ If you were to say:
 Bulletin Board will expire the note at the end of day on the next Thursday that passes. If today is Thursday it will expire tonight, If today is Monday it will expire three days from now, If Today is Friday it will expire 6 days from now.
 
 If an expiry cannot be deduced from the message, then the note does not expire. It will have to be removed manually.
+
+## Help
+
+Bulletin Board implements a help system:
+
+> "I need some help."
+
+Will launch the help system which will explain all features available in the application. The Help system's list navigation works using the exact same list navigation as the Bulletin Board. Select items, and return to them main list in exactly the same way.
