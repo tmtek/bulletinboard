@@ -15,7 +15,7 @@
   "author": "tmtek",
   "license": "ISC",
   "dependencies": {
-    "@tmtek/convo": "^0.2.14",
+    "@tmtek/convo": "^0.2.17",
     "javascript-time-ago": "^1.0.31"
   }
 }
