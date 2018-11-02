@@ -12,6 +12,14 @@
     "home",
     "convo"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tmtek/bulletinboard.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tmtek/bulletinboard/issues"
+  },
+  "homepage": "https://github.com/tmtek/bulletinboard#readme",
   "author": "tmtek",
   "license": "ISC",
   "dependencies": {
