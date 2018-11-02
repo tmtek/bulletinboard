@@ -1,5 +1,5 @@
-test.js
+simulate.js
 fulfillment.js
-private.js
-storage.json
 .DS_Store
+simulate/
+test/

@@ -7,4 +7,4 @@
 yarn.lock
 /.vscode
 private.js
-storage.json
+/simulate/storage.json

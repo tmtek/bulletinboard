@@ -1,10 +1,10 @@
 {
   "name": "@tmtek/bulletinboard",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A convo app for shared reminders",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "keywords": [
     "dialoglow",
@@ -15,7 +15,10 @@
   "author": "tmtek",
   "license": "ISC",
   "dependencies": {
-    "@tmtek/convo": "^0.2.19",
+    "@tmtek/convo": "^0.2.21",
     "javascript-time-ago": "^1.0.31"
+  },
+  "devDependencies": {
+    "mocha": "^5.2.0"
   }
 }

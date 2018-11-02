@@ -1,13 +1,12 @@
-const {BulletinBoard} = require('./index');
+const {BulletinBoard} = require('../index');
 const {Convo, ConvoStorage} = require('@tmtek/convo');
 
 
-let cs = new ConvoStorage("storage.json")
+let cs = new ConvoStorage("./simulate/storage.json")
 	cs.load(storageConvo => {
 		new BulletinBoard()
 		  .intent(storageConvo, 'welcome', null, null, {log:false})
-			.then(({app, convo}) => app.intent(new Convo(convo), 'help', null, null, {log:false}))
-			.then(({app, convo}) => app.intent(new Convo(convo), 'list_select', {index:3}, null, {log:true}))
+			.then(({requests}) => console.log(JSON.stringify(requests, null, 2)))
 			//.then(({app, convo}) => app.intent(storageConvo, 'update_expires', {}, null, {log:true}))
 			//.then(({app, convo}) => app.intent(new Convo(convo), 'add_bulletin', {bulletin:"Give Seb a bath today"}, null, {log:true}))
 			//.then(({app, convo}) => app.intent(new Convo(storageConvo), 'read_bulletins', {}, null, {log:true}))
