@@ -23,7 +23,7 @@
   "author": "tmtek",
   "license": "ISC",
   "dependencies": {
-    "@tmtek/convo": "^0.2.21",
+    "@tmtek/convo": "^0.2.22",
     "javascript-time-ago": "^1.0.31"
   },
   "devDependencies": {

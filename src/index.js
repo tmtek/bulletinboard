@@ -96,7 +96,7 @@ class BulletinBoard extends ConvoApp {
 		return convo.speak("Can't access the list right now.");
 	}
 
-	onRespondForListSelection({ convo, type, item }) {
+	onRespondForSelection({ convo, type, item }) {
 		if (type === 'bulletin' && item) {
 			return convo
 			.speak(Say.ensureSentence(`${item.text}`))
